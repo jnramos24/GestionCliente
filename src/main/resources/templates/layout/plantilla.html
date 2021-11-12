@@ -12,10 +12,12 @@
     </header>
 
     <footer th:fragment="footer">
-        <div >
-            <p> [[#{plantilla.pie-pagina}]]
+        <div style="padding-top: 10px;">
+            <a th:href="@{/(lang=es)}">ES</a>|
+            <a th:href="@{/(lang=en)}">EN</a>|
+            <span> [[#{plantilla.pie-pagina}]]
                 <a href="htttp://www.google.com.ar" target="blank">Link de prueba a google</a>
-            </p>
+            </span>
             
         </div>
     </footer>
