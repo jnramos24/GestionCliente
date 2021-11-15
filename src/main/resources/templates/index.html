@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xlmns="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +11,7 @@
         <div>
             <header th:replace="layout/plantilla :: header"></header>
             
-            <a th:href="@{agregar}">[[#{persona.crear}]]</a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{agregar}">[[#{persona.crear}]]</a>
         </div>
         <div th:if=" ${personas != null and !personas.empty}">
             <table border="1">
@@ -20,8 +20,8 @@
                     <th>[[#{persona.apellido}]]</th>
                     <th>[[#{persona.email}]]</th>
                     <th>[[#{persona.telefono}]]</th>
-                    <th>[[#{accion.editar}]]</th>
-                    <th>[[#{accion.eliminar}]]</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.editar}]]</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.eliminar}]]</th>
                     
                 </tr>
                 <tr th:each="persona : ${personas}">
@@ -29,10 +29,8 @@
                     <td th:text="${persona.apellido}">Mostrar Apellido</td>
                     <td th:text="${persona.email}">Mostrar Mail</td>
                     <td th:text="${persona.telefono}">Mostrar Telefono</td>
-                    <td> <a th:href="@{/editar/} + ${persona.idPersona}">[[#{accion.editar}]]</a></td>
-                    <td> <a th:href="@{/eliminar/} + ${persona.idPersona}">[[#{accion.eliminar}]]</a></td>
-                    
-                        
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/editar/} + ${persona.idPersona}">[[#{accion.editar}]]</a></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/eliminar/} + ${persona.idPersona}">[[#{accion.eliminar}]]</a></td>    
                 </tr>
             </table>
         </div>
