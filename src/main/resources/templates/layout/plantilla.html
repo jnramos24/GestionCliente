@@ -16,9 +16,11 @@
             <a th:href="@{/(lang=es)}">ES</a>|
             <a th:href="@{/(lang=en)}">EN</a>|
             <span> [[#{plantilla.pie-pagina}]]
-                <a href="htttp://www.google.com.ar" target="blank">Link de prueba a google</a>
+                <a href="https://www.google.com/" target="not-blank">Link de prueba a google</a>
             </span>
-            
+            <form method="post" th:action="@{/logout}">
+                <button onclick="this.parentNode.submit()">Logout</button>
+            </form>
         </div>
     </footer>
 </body>
