@@ -20,7 +20,7 @@
 
         <br />
         <label for="nombre">[[#{persona.nombre}]]:</label>
-        <input type="text" name="nombre" th:field="*{nombre}" />
+        <input type="text" name="nombre" th:field="*{nombre}"/>
         <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></span>
         <br />
 
