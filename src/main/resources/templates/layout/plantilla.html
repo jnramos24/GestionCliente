@@ -2,29 +2,76 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
     xlmns="http://www.thymeleaf.org/extras/spring-security">
 
-<head>
+<head th:fragment="head">
     <meta charset="UTF-8">
     <title>Plantilla</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/webjars/font-awesome/5.15.4/css/all.css}">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </head>
 
 <body>
     <header th:fragment="header">
-        <h1>[[#{plantilla.titulo}]]</h1>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container">
+                <a th:href="@{/}" class="navbar-brand" th:text="#{plantilla.titulo}">Titulo</a>
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+                    <ul class="navbar-nav">
+                        <li class="nav-item px-3">
+                            <a th:href="@{/}" class="nav-link active" th:text="#{barra.titulo}"></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto" sec:authorize="isAuthenticated()">
+                        <li class="nav-item mr-3">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-user"></i>
+                                <span th:text="#{barra.bienvenido}"></span>
+                                <span sec:authentication="name">Usuario</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <form method="POST" th:action="@{logout}">
+                                <a href="#" onclick="this.parentNode.submit();" class="nav-link">
+                                    <i class="fas fa-user-times"></i>[[#{barra.salir}]]
+                                </a>
+                            </form>
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section id="main-header" class="py-2 bg-info text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h1 class="fas fa-cog" th:text="#{plantilla.titulo}"></h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </header>
 
-    <footer th:fragment="footer">
-        <div style="padding-top: 10px;">
-            <a th:href="@{/(lang=es)}">ES</a>|
-            <a th:href="@{/(lang=en)}">EN</a>|
-            <span> [[#{plantilla.pie-pagina}]]
-                <a href="https://www.google.com/" target="not-blank">Link de prueba a google</a>
-            </span>
-            <form method="post" th:action="@{/logout}">
-                <b>User:</b> <span sec:authentication="name">Usuario que hizo login</span>|
-                <b>Roles:</b> <span sec:authentication="principal.authorities">Roles</span>|
-                <button onclick="this.parentNode.submit()">Logout</button>
-            </form>
-        </div>
+    <footer th:fragment="footer" class="bg-dark text-white p-5 mt-5">
+        <div class="container">
+            <div class="col">
+                <p class="lead text-center">
+                    <a th:href="@{/(lang=es)}">ES</a>|
+                    <a th:href="@{/(lang=en)}">EN</a>|
+                    <span> [[#{plantilla.pie-pagina}]] &copy;
+                        <a href="https://www.google.com/" target="not-blank">Link de prueba a google</a>
+                    </span>
+                </p>
+            </div>
+        </div>       
     </footer>
 </body>
 
