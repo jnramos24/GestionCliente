@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -24,12 +25,17 @@ public class Persona implements Serializable{
     
     @NotEmpty(message="El nombre no puede estar vacio")
     private String nombre;
+    
     @NotEmpty(message="El apellido no puede estar vacio")
     private String apellido;
+    
     @NotEmpty(message="El email no puede estar vacio")
     @Email(message="Introduzca un email valido")
     private String email;
     private String telefono;
+    
+    @NotNull
+    private double saldo;
     
 
 }

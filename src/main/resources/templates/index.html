@@ -1,43 +1,21 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml" xlmns="http://www.thymeleaf.org/extras/spring-security">
-    <head th:replace="/layout/plantilla :: head">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Inicio</title>
-    </head>
-    <body>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+    xlmns="http://www.thymeleaf.org/extras/spring-security">
 
-        <div>
-            <header th:replace="layout/plantilla :: header"></header>
-            
-            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{agregar}">[[#{persona.crear}]]</a>
-        </div>
-        <div th:if=" ${personas != null and !personas.empty}">
-            <table border="1">
-                <tr>
-                    <th>[[#{persona.nombre}]]</th>
-                    <th>[[#{persona.apellido}]]</th>
-                    <th>[[#{persona.email}]]</th>
-                    <th>[[#{persona.telefono}]]</th>
-                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.editar}]]</th>
-                    <th sec:authorize="hasRole('ROLE_ADMIN')">[[#{accion.eliminar}]]</th>
-                    
-                </tr>
-                <tr th:each="persona : ${personas}">
-                    <td th:text="${persona.nombre}">Mostrar Nombre</td>
-                    <td th:text="${persona.apellido}">Mostrar Apellido</td>
-                    <td th:text="${persona.email}">Mostrar Mail</td>
-                    <td th:text="${persona.telefono}">Mostrar Telefono</td>
-                    <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/editar/} + ${persona.idPersona}">[[#{accion.editar}]]</a></td>
-                    <td sec:authorize="hasRole('ROLE_ADMIN')"> <a th:href="@{/eliminar/} + ${persona.idPersona}">[[#{accion.eliminar}]]</a></td>    
-                </tr>
-            </table>
-        </div>
-        <div th:if="${personas == null or personas.empty}">
-            [[#{persona.lista-vacia}]]
-        </div>
+<head th:replace="/layout/plantilla :: head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+</head>
 
-        <footer th:replace="layout/plantilla :: footer"></footer>
-    </body>
+<body>
+
+    <header th:replace="layout/plantilla :: header"></header>
+    <section th:replace="layout/botonesAgregar :: botonesAgregar"></section>
+    <section th:replace="layout/agregarCliente :: agregarCliente"></section>
+    <section th:replace="layout/listadoClientes :: listadoClientes"></section>
+    <footer th:replace="layout/plantilla :: footer"></footer>
+</body>
+
 </html>

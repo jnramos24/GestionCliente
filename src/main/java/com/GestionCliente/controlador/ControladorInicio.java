@@ -27,6 +27,13 @@ public class ControladorInicio {
         
         log.info("Conexion con Spring");
         model.addAttribute("personas", personas);
+        
+        Double saldoTotal = 0D;
+        for (Persona persona : personas) {
+            saldoTotal += persona.getSaldo();
+        }
+        model.addAttribute("saldoTotal", saldoTotal);
+        model.addAttribute("totalClientes",personas.size());
         return "index";
     }
     
