@@ -28,7 +28,7 @@ public class ControladorInicio {
         log.info("Conexion con Spring");
         model.addAttribute("personas", personas);
         
-        Double saldoTotal = 0D;
+        Double saldoTotal = 0.0;
         for (Persona persona : personas) {
             saldoTotal += persona.getSaldo();
         }
